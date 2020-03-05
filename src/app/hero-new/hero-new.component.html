@@ -1,0 +1,52 @@
+
+  <h2>Créer un nouveau héro</h2>
+  <div><span>Point disponible: </span>{{getPointRestant()}}</div>
+  <div>
+    <label>Nom:</label>
+    <input [(ngModel)]="hero.name"  placeholder="name"/>
+    <div [hidden]="hero.name" *ngIf="hint"
+         class="alert alert-danger" style="color: red">
+      Name is required
+    </div>
+  </div>
+  <div>
+    <label>Vie:</label>
+    <button (click)="increase('pdv')">+</button>
+    {{hero.pdv}}
+    <button (click)="decrease('pdv')">-</button>
+
+
+  </div>
+  <div>
+    <label>Dégats:</label>
+    <button (click)="increase('degats')">+</button>
+    {{hero.degats}}
+    <button (click)="decrease('degats')">-</button>
+
+  </div>
+  <div>
+    <label>Attaque:    </label>
+    <button (click)="increase('attaque')">+</button>
+    {{hero.attaque}}
+    <button (click)="decrease('attaque')">-</button>
+
+  </div>
+  <div>
+    <label>Esquive:    </label>
+    <button (click)="increase('esquive')">+</button>
+    {{hero.esquive}}
+    <button (click)="decrease('esquive')">-</button>
+  </div>
+  <br/>
+
+  <label>Weapon:</label>
+  <select [(ngModel)]="selectedWeapon">
+    <option *ngFor="let weapon of weapons" [ngValue]="weapon.id">{{weapon.name}}</option>
+  </select>
+
+  <br/>
+
+  <button (click)="save()">Créer héro</button>
+  <br/>  <br/>
+
+  <button (click)="goBack()">go back</button>

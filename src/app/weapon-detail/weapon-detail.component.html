@@ -1,0 +1,53 @@
+<div *ngIf="weapon">
+
+  <h2>{{weapon.name | uppercase}} Details</h2>
+  <div>
+    <div><span>Somme des points vaux: </span>{{getTotalPoints()}}
+      <div *ngIf="getTotalPoints()!==0"
+           class="alert alert-danger " style="color: red">
+        La somme des points doit être égale à 0 !
+      </div>
+    </div>
+
+    <label>Nom:</label>
+    <input [(ngModel)]="weapon.name" (ngModelChange)="updated=true" placeholder="name"/>
+    <div [hidden]="weapon.name"
+         class="alert alert-danger " style="color: red">
+      Name is required
+    </div>
+    <div>
+      <label>Vie:</label>
+      <button (click)="increase('pdv')">+</button>
+      {{weapon.pdv}}
+      <button (click)="decrease('pdv')">-</button>
+
+
+    </div>
+    <div>
+      <label>Dégats:</label>
+      <button (click)="increase('degats')">+</button>
+      {{weapon.degats}}
+      <button (click)="decrease('degats')">-</button>
+
+    </div>
+    <div>
+      <label>Attaque:    </label>
+      <button (click)="increase('attaque')">+</button>
+      {{weapon.attaque}}
+      <button (click)="decrease('attaque')">-</button>
+
+    </div>
+    <div>
+      <label>Esquive:    </label>
+      <button (click)="increase('esquive')">+</button>
+      {{weapon.esquive}}
+      <button (click)="decrease('esquive')">-</button>
+    </div>
+  </div>
+
+<div *ngIf="updated">
+  <button (click)="save()">Enregistrer modifications</button>
+</div>
+<button (click)="goBack()">go back</button>
+<button (click)="deleteWeapon()">Supprimer Mon Arme</button>
+</div>

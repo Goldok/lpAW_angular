@@ -1,0 +1,12 @@
+<h2>My weapons</h2>
+<button routerLink="/weapon/new/">New weapon</button>
+
+<ul class="weapons">
+  <li *ngFor="let weapon of weapons"
+      [class.selected]="weapon === selectedWeapon"
+      (click)="onSelect(weapon)"
+      routerLink="/detailWeapon/{{weapon.id}}"
+  >
+    <span class="badge">{{weapon.name}}</span>
+  </li>
+</ul>
