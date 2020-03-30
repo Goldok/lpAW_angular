@@ -43,7 +43,7 @@
     </div>
   </div>
 <br/>
-  <button (click)="save()">Créer mon arme</button>
+  <button (click)="save()"  *ngIf="getPointRestant()==0">Créer mon arme</button>
 <br/>
 
 <button (click)="goBack()">go back</button>

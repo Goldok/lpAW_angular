@@ -46,7 +46,7 @@
   </div>
 
 <div *ngIf="updated">
-  <button (click)="save()">Enregistrer modifications</button>
+  <button (click)="save()" *ngIf="getTotalPoints() ==0">Enregistrer modifications</button>
 </div>
 <button (click)="goBack()">go back</button>
 <button (click)="deleteWeapon()">Supprimer Mon Arme</button>
