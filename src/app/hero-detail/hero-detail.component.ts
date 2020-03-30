@@ -1,10 +1,10 @@
-import {Component, OnInit, Input, NgModule} from '@angular/core';
+import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { Hero } from '../data/hero';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HeroService } from '../services/hero.service';
-import {WeaponService} from '../services/weapon.service';
-import {Weapon} from '../data/weapon';
+import { WeaponService } from '../services/weapon.service';
+import { Weapon } from '../data/weapon';
 
 
 @Component({
@@ -16,13 +16,14 @@ import {Weapon} from '../data/weapon';
 export class HeroDetailComponent implements OnInit {
 
   updated: boolean;
+  selectedWeapon: Weapon;
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
     private weaponService: WeaponService,
     private location: Location
-  ) {}
+  ) { }
 
 
   @Input() hero: Hero;
@@ -30,12 +31,12 @@ export class HeroDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHero();
-    this.getWeapons();
+    this.selectedWeapon = null;
   }
 
   getHero(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.heroService.getHero(id.toString()).subscribe(hero => this.hero = hero);
+    this.heroService.getHero(id.toString()).subscribe(hero => { this.hero = hero; this.getWeapons() });
   }
 
   goBack(): void {
@@ -45,37 +46,37 @@ export class HeroDetailComponent implements OnInit {
     if (this.hero.attaque + this.hero.degats + this.hero.esquive + this.hero.pdv >= 40) { return; }
     this.updated = true;
     if (attribute === 'degats') {
-      this.hero.degats ++;
+      this.hero.degats++;
     }
     if (attribute === 'pdv') {
-      this.hero.pdv ++;
+      this.hero.pdv++;
     }
     if (attribute === 'attaque') {
-      this.hero.attaque ++;
+      this.hero.attaque++;
     }
     if (attribute === 'esquive') {
-      this.hero.esquive ++;
+      this.hero.esquive++;
     }
   }
   decrease(attribute): void {
     this.updated = true;
 
     if (attribute === 'degats' && this.hero.degats > 1) {
-      this.hero.degats --;
+      this.hero.degats--;
     }
     if (attribute === 'pdv' && this.hero.pdv > 1) {
-      this.hero.pdv --;
+      this.hero.pdv--;
     }
     if (attribute === 'esquive' && this.hero.esquive > 1) {
-      this.hero.esquive --;
+      this.hero.esquive--;
     }
     if (attribute === 'attaque' && this.hero.attaque > 1) {
-      this.hero.attaque --;
+      this.hero.attaque--;
     }
   }
   save(): void {
     if (this.hero.name === '') {
-      return ;
+      return;
     }
     this.heroService.updateHero(this.hero.id, this.hero);
     this.location.back();
@@ -90,6 +91,13 @@ export class HeroDetailComponent implements OnInit {
   }
   getWeapons(): void {
     this.weaponService.getWeapons()
-      .subscribe(weapons => this.weapons = weapons);
+      .subscribe(weapons => { this.weapons = weapons; this; this.getSelectedWeapon() });
+  }
+  getSelectedWeapon(): void {
+    if (this.hero.weaponId) {
+      this.selectedWeapon = this.weapons.filter(w => w.id === this.hero.weaponId)[0];
+    } else {
+      this.selectedWeapon = null;
+    }
   }
 }

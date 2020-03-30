@@ -40,12 +40,17 @@
   <br/>
 
   <label>Weapon:</label>
-  <select [(ngModel)]="selectedWeapon">
+  <select [(ngModel)]="hero.weaponId" (ngModelChange)="getSelectedWeapon()">
     <option *ngFor="let weapon of weapons" [ngValue]="weapon.id">{{weapon.name}}</option>
   </select>
 
   <br/>
-
+  <div class="selectedWeapon" *ngIf="selectedWeapon !== null">
+    vie : {{selectedWeapon.pdv}}<br/>
+    dégats : {{selectedWeapon.degats}}<br/>
+    attaque : {{selectedWeapon.attaque}}<br/>
+    esquive : {{selectedWeapon.esquive}}
+  </div>
   <button (click)="save()">Créer héro</button>
   <br/>  <br/>
 

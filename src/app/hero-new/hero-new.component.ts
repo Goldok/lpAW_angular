@@ -15,7 +15,7 @@ export class HeroNewComponent implements OnInit {
   @Input()
   hero: Hero;
   weapons: Weapon[];
-  selectedWeapon: string;
+  selectedWeapon: Weapon;
   hint: boolean
   constructor(
     private location: Location,
@@ -25,6 +25,7 @@ export class HeroNewComponent implements OnInit {
 
   ngOnInit() {
     this.getWeapons();
+    this.selectedWeapon = null;
     this.hero = new Hero();
     this.hint = false;
     this.hero.name = '';
@@ -66,14 +67,9 @@ export class HeroNewComponent implements OnInit {
     }
   }
   save(): void {
-    console.log('SELECTED WEAPON :', this.selectedWeapon);
-
     if (this.hero.name === '') {
       this.hint = true;
       return ;
-    }
-    if (this.selectedWeapon){
-      this.hero.weaponId = this.selectedWeapon;
     }
     this.heroService.addHero(this.hero);
     this.goBack();
@@ -88,6 +84,13 @@ export class HeroNewComponent implements OnInit {
   getWeapons(): void {
     this.weaponService.getWeapons()
       .subscribe(weapons => this.weapons = weapons);
+  }
+  getSelectedWeapon(): void {
+    if (this.hero.weaponId) {
+      this.selectedWeapon = this.weapons.filter(w => w.id === this.hero.weaponId)[0];
+    } else {
+      this.selectedWeapon = null;
+    }
   }
 
 }
