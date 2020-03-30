@@ -68,4 +68,12 @@ export class HeroesComponent implements OnInit {
     this.heroes = this.heroesMemory;
     this.heroes = this.heroes.filter(hero => hero.name.toLocaleLowerCase().includes(this.input.toLocaleLowerCase()));
   }
+  heroHaveWeapon(hero :Hero): boolean{
+    if (this.weapons.some(e=>e.id===hero.weaponId)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }

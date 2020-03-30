@@ -1,7 +1,7 @@
 <h2>My weapons</h2>
 <button routerLink="/weapon/new/">New weapon</button>
 
-<div class="container">
+<div class="container"  *ngIf="weapons && weapons.length>0">
   <input type="text" placeholder="Search weapons..." [(ngModel)]="input" (ngModelChange)="searchWeaponsByName()">
 
   <table *ngIf="weapons">

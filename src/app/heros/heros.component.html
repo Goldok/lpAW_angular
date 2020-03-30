@@ -13,7 +13,7 @@
   </li>
 </ul> -->
 
-<div class="container">
+<div class="container"  *ngIf="heroes && heroes.length>0">
   <input type="text" placeholder="Search heroes..."  [(ngModel)]="input" (ngModelChange)="searchHeroesByName()">
 
   <table *ngIf="weapons && heroes">
@@ -35,7 +35,7 @@
         <td>{{hero.degats}}</td>
         <td>{{hero.attaque}}</td>
         <td>{{hero.esquive}}</td>
-        <td routerLink="/detailWeapon/{{hero.weaponId}}">{{getWeaponNameById(hero.weaponId)}}</td>
+        <td routerLink="/detailWeapon/{{hero.weaponId}}" *ngIf="heroHaveWeapon(hero)">{{getWeaponNameById(hero.weaponId)}}</td>
 
       </tr>
     </tbody>
