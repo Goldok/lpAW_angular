@@ -32,7 +32,7 @@ import { WeaponNewComponent } from './weapon-new/weapon-new.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'my-app-name'), // imports firebase/app needed for everything
+    AngularFireModule.initializeApp(environment.firebase, 'lpAW_angular'), // imports firebase/app needed for everything
     AngularFireAnalyticsModule, // dynamically imports firebase/analytics
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
