@@ -35,7 +35,7 @@
         <td>{{hero.degats}}</td>
         <td>{{hero.attaque}}</td>
         <td>{{hero.esquive}}</td>
-        <td>{{getWeaponNameById(hero.weaponId)}}</td>
+        <td routerLink="/detailWeapon/{{hero.weaponId}}">{{getWeaponNameById(hero.weaponId)}}</td>
 
       </tr>
     </tbody>
