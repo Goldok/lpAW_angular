@@ -1,5 +1,8 @@
 <h2>My Heroes</h2>
+<br>
 <button routerLink="/hero/new">New Hero</button>
+<br>
+<!--
 <ul class="heroes">
   <li *ngFor="let hero of heroes"
       [class.selected]="hero === selectedHero"
@@ -8,4 +11,33 @@
   >
     <span class="badge">{{hero.name}}</span>
   </li>
-</ul>
+</ul> -->
+
+<div class="container">
+  <input type="text" placeholder="Search heroes..."  [(ngModel)]="input" (ngModelChange)="searchHeroesByName()">
+
+  <table *ngIf="weapons && heroes">
+    <thead>
+      <tr>
+        <th scope="col" (click)="sortHeroesByName()"> <a class="sort-by">Nom</a></th>
+        <th scope="col" class="sort-by" (click)="sortHeroesByProperty('pdv')"> <a class="sort-by">Vie</a></th>
+        <th scope="col" (click)="sortHeroesByProperty('degats')"> <a class="sort-by">Dégats</a></th>
+        <th scope="col" (click)="sortHeroesByProperty('attaque')"> <a class="sort-by">Attaque</a></th>
+        <th scope="col" (click)="sortHeroesByProperty('esquive')"> <a class="sort-by">Esquive</a></th>
+        <th scope="col">Arme</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)"
+        routerLink="/detail/{{hero.id}}">
+        <th scope="row">{{hero.name}}</th>
+        <td>{{hero.pdv}}</td>
+        <td>{{hero.degats}}</td>
+        <td>{{hero.attaque}}</td>
+        <td>{{hero.esquive}}</td>
+        <td>{{getWeaponNameById(hero.weaponId)}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -34,7 +34,6 @@ export class WeaponService {
             // Get document id
             const id = a.payload.doc.id;
             weapon.id = id;
-
             // Use spread operator to add the id to the document data
             return weapon;
 

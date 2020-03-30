@@ -1,12 +1,28 @@
 <h2>My weapons</h2>
 <button routerLink="/weapon/new/">New weapon</button>
 
-<ul class="weapons">
-  <li *ngFor="let weapon of weapons"
-      [class.selected]="weapon === selectedWeapon"
-      (click)="onSelect(weapon)"
-      routerLink="/detailWeapon/{{weapon.id}}"
-  >
-    <span class="badge">{{weapon.name}}</span>
-  </li>
-</ul>
+<div class="container">
+  <input type="text" placeholder="Search weapons..." [(ngModel)]="input" (ngModelChange)="searchWeaponsByName()">
+
+  <table *ngIf="weapons">
+    <thead>
+      <tr>
+        <th scope="col" (click)="sortWeaponsByName()"> <a class="sort-by">Nom</a></th>
+        <th scope="col" class="sort-by" (click)="sortWeaponsByProperty('pdv')"> <a class="sort-by">Vie</a></th>
+        <th scope="col" (click)="sortWeaponsByProperty('degats')"> <a class="sort-by">Dégats</a></th>
+        <th scope="col" (click)="sortWeaponsByProperty('attaque')"> <a class="sort-by">Attaque</a></th>
+        <th scope="col" (click)="sortWeaponsByProperty('esquive')"> <a class="sort-by">Esquive</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let weapon of weapons" [class.selected]="weapon === selectedWeapon" (click)="onSelect(weapon)"
+        routerLink="/detailWeapon/{{weapon.id}}">
+        <th scope="row">{{weapon.name}}</th>
+        <td>{{weapon.pdv}}</td>
+        <td>{{weapon.degats}}</td>
+        <td>{{weapon.attaque}}</td>
+        <td>{{weapon.esquive}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
